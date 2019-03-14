@@ -18,5 +18,30 @@
   "homepage": "https://github.com/pustovitDmytro/url-resolver#readme",
   "dependencies": {
     "url-regex": "^4.1.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.4",
+    "@babel/node": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.3.4",
+    "@babel/plugin-proposal-decorators": "^7.3.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.3.4",
+    "@babel/plugin-proposal-optional-chaining": "^7.2.0",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/runtime": "^7.3.4",
+    "babel": "^6.23.0",
+    "babel-eslint": "^10.0.1",
+    "copy-webpack-plugin": "^5.0.1",
+    "eslint": "^5.15.1",
+    "eslint-config-webbylab": "^4.0.0",
+    "eslint-plugin-fetch": "0.0.1",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-more": "^0.3.2",
+    "eslint-plugin-no-require-lodash": "^1.1.0",
+    "eslint-plugin-prefer-spread": "^1.0.3",
+    "eslint-plugin-react": "^7.12.4",
+    "fs-extra": "^7.0.1",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3"
   }
 }
