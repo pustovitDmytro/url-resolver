@@ -5,10 +5,23 @@ const src = path.join(__dirname, 'src');
 const fs = require('fs-extra');
 const CopyPlugin = require('copy-webpack-plugin');
 
-module.exports = (env = {}, argv) => {
-    const browser = env.BROWSER || 'chrome';
+const defaultEnv = {
+    BROWSER : 'chrome',
+    MODE    : 'development'
+};
+
+module.exports = (localEnv = {}) => {
+    const env = {
+        ...defaultEnv,
+        ...process.env,
+        ...localEnv
+    };
+    const browser = env.BROWSER;
+
+    console.log('USING BROWSER:', browser);
+    console.log('USING MODE:', env.MODE);
+
     const dist = path.join(__dirname, 'dist', browser);
-    const mode = 'development';
     const entries = {};
 
     [ 'background', 'popup', 'content' ]
@@ -21,10 +34,13 @@ module.exports = (env = {}, argv) => {
         });
 
     return {
-        mode,
-        entry        : entries,
-        watch        : true,
-        devtool      : 'cheap-module-source-map',
+        mode    : env.MODE,
+        entry   : entries,
+        devtool : 'cheap-module-source-map',
+        watch   : true,
+        node    : {
+            fs : 'empty'
+        },
         watchOptions : {
             ignored : /node_modules/
         },
@@ -32,10 +48,34 @@ module.exports = (env = {}, argv) => {
             path     : dist,
             filename : '[name].js'
         },
+        module : {
+            rules : [
+                {
+                    test    : /\.js$/,
+                    exclude : /node_modules/,
+                    use     : [
+                        'babel-loader',
+                        {
+                            loader  : 'eslint-loader',
+                            options : {
+                                emitWarning : true
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        // externals : {
+        //     'fs'       : 'require("fs")',
+        // },
         plugins : [
             new webpack.DefinePlugin({
-                BROWSER    : JSON.stringify(browser),
-                PRODUCTION : mode === 'production'
+                BROWSER       : JSON.stringify(browser),
+                DEBUG         : JSON.stringify(true),
+                'process.env' : {
+                    NODE_ENV : JSON.stringify(env.MODE || 'development')
+                }
+
             }),
             new CopyPlugin([
                 { from: path.join(src, 'manifest.json'), to: dist },

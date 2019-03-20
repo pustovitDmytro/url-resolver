@@ -1,6 +1,5 @@
 {
     "name": "Url-resolver",
-    "default_locale": "en",
     "description": "This extension allows to resolve decoded url's in adress bar",
     "background": {
       "scripts": [ "background.js" ],

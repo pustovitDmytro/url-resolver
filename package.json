@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "firefox": "BROWSER=firefox npx webpack & npx web-ext build --config etc/web-ext.config.js --verbose",
+    "chrome": "BROWSER=chrome npx webpack"
   },
   "repository": {
     "type": "git",
@@ -17,7 +19,8 @@
   },
   "homepage": "https://github.com/pustovitDmytro/url-resolver#readme",
   "dependencies": {
-    "url-regex": "^4.1.1"
+    "url-regex": "^4.1.1",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
@@ -29,11 +32,12 @@
     "@babel/plugin-proposal-optional-chaining": "^7.2.0",
     "@babel/preset-env": "^7.3.4",
     "@babel/runtime": "^7.3.4",
-    "babel": "^6.23.0",
     "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.5",
     "copy-webpack-plugin": "^5.0.1",
     "eslint": "^5.15.1",
     "eslint-config-webbylab": "^4.0.0",
+    "eslint-loader": "^2.1.2",
     "eslint-plugin-fetch": "0.0.1",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-more": "^0.3.2",
@@ -41,6 +45,7 @@
     "eslint-plugin-prefer-spread": "^1.0.3",
     "eslint-plugin-react": "^7.12.4",
     "fs-extra": "^7.0.1",
+    "web-ext": "^3.0.0",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3"
   }

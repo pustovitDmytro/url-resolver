@@ -2,7 +2,7 @@ const urlRegex = require('url-regex');
 
 function fullyDecodeURI(uri) {
     while (isEncoded(uri)) {
-        uri = decodeURIComponent(uri);
+        uri = decodeURIComponent(uri);// eslint-disable-line no-param-reassign
     }
 
     return uri;
