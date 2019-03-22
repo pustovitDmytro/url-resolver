@@ -1,6 +1,6 @@
 import { log } from './utils/decorators';
 
-@log('Browser')
+@log()
 class Browser {
     constructor(client) {
         this.client = client;
@@ -9,7 +9,7 @@ class Browser {
         this.client.tabs.update({ url });
     }
     onNewTab(func) {
-        this.client.tabs.onActivated.addListener(function (info) {
+        this.client.tabs.onActivated.addListener(info => {
             this.client.tabs.get(info.tabId, func);
         });
     }
@@ -21,5 +21,9 @@ class Browser {
     }
 }
 
-export default new Browser(BROWSER === 'firefox' ? browser : chrome); // eslint-disable-line no-undef
+const { BROWSER } = process.env;
+
+const client = BROWSER === 'firefox' ? browser : chrome; // eslint-disable-line no-undef
+
+export default new Browser(client);
 

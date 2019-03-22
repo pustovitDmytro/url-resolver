@@ -20,7 +20,8 @@
   "homepage": "https://github.com/pustovitDmytro/url-resolver#readme",
   "dependencies": {
     "url-regex": "^4.1.1",
-    "winston": "^3.2.1"
+    "winston": "^3.2.1",
+    "winston-console-transport": "^0.0.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",

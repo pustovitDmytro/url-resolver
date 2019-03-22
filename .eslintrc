@@ -1,7 +1,7 @@
 {
     "extends": "webbylab",
     "env": {
-        "browser": false
+        "browser": true
     },
     "rules": {
         "import/no-commonjs": 0,

@@ -1,16 +1,16 @@
 const path = require('path');
 const webpack = require('webpack');
-
-const src = path.join(__dirname, 'src');
 const fs = require('fs-extra');
 const CopyPlugin = require('copy-webpack-plugin');
+
+const src = path.join(__dirname, 'src');
 
 const defaultEnv = {
     BROWSER : 'chrome',
     MODE    : 'development'
 };
 
-module.exports = (localEnv = {}) => {
+module.exports = async (localEnv = {}) => {
     const env = {
         ...defaultEnv,
         ...process.env,
@@ -18,20 +18,22 @@ module.exports = (localEnv = {}) => {
     };
     const browser = env.BROWSER;
 
-    console.log('USING BROWSER:', browser);
-    console.log('USING MODE:', env.MODE);
 
     const dist = path.join(__dirname, 'dist', browser);
     const entries = {};
 
-    [ 'background', 'popup', 'content' ]
-        .forEach(name => {
+    await Promise.all([ 'background', 'popup', 'content' ]
+        .map(async (name) => {
             const entry = path.join(src, `${name}.js`);
 
-            if (fs.existsSync(entry)) {
+            if (await fs.exists(entry)) {
                 entries[name] = entry;
             }
-        });
+        })
+    );
+
+    console.log('USING BROWSER:', browser);
+    console.log('USING MODE:', env.MODE);
 
     return {
         mode    : env.MODE,
@@ -65,15 +67,12 @@ module.exports = (localEnv = {}) => {
                 }
             ]
         },
-        // externals : {
-        //     'fs'       : 'require("fs")',
-        // },
         plugins : [
             new webpack.DefinePlugin({
-                BROWSER       : JSON.stringify(browser),
-                DEBUG         : JSON.stringify(true),
                 'process.env' : {
-                    NODE_ENV : JSON.stringify(env.MODE || 'development')
+                    NODE_ENV : JSON.stringify(env.MODE),
+                    BROWSER  : JSON.stringify(browser),
+                    DEBUG    : JSON.stringify('1')
                 }
 
             }),

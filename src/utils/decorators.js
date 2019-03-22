@@ -37,7 +37,7 @@ function getFunctionLoggerDecorator(method, {
         try {
             const result = await method.apply(this, args);
 
-            logger.log(level, {
+            logger[level]({
                 service   : serviceName,
                 method    : logMethodName,
                 params    : paramsSanitizer(args),
@@ -89,6 +89,6 @@ function getClassLoggerDecorator(serviceName, {
 export function log(...args) {
     return function (target) {
         if (isClass(target)) return getClassLoggerDecorator(...args)(target);
-        if (isFunction(target)) return getFunctionLoggerDecorator(...args)(target);
+        if (isFunction(target)) return getFunctionLoggerDecorator(target, ...args);
     };
 }

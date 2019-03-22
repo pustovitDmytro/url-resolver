@@ -1,7 +1,8 @@
-const { createLogger, format, transports } = require('winston');
+import Console from 'winston-console-transport';
+import { createLogger, format } from 'winston';
 
-const { LOG_LEVEL } = process.env;
-const level = LOG_LEVEL || DEBUG && 'debug' || 'info';// eslint-disable-line no-undef
+const { LOG_LEVEL, DEBUG } = process.env;
+const level = LOG_LEVEL || DEBUG && 'debug' || 'info'; // eslint-disable-line no-undef
 
 export default createLogger({
     level,
@@ -17,5 +18,5 @@ export default createLogger({
         format.timestamp(),
         format.json()
     ),
-    transports : [ new transports.Console() ]
+    transports : [ new Console() ]
 });
