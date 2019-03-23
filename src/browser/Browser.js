@@ -1,4 +1,4 @@
-import { log } from './utils/decorators';
+import { log } from '../utils/decorators';
 
 @log()
 class Browser {
@@ -21,9 +21,5 @@ class Browser {
     }
 }
 
-const { BROWSER } = process.env;
-
-const client = BROWSER === 'firefox' ? browser : chrome; // eslint-disable-line no-undef
-
-export default new Browser(client);
+export default Browser;
 

@@ -1,4 +1,4 @@
-import { log } from './utils/decorators';
+import { log } from './decorators';
 
 const urlRegex = require('url-regex');
 
