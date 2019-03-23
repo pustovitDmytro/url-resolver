@@ -15,15 +15,14 @@ const REDIRECT_REDUCER = (state, payload) => ({
     [REDIRECT_FINISHED] : { ...state, redirectUrl: null }
 });
 
-const REDUCER = state => ({
+const REDUCER = (state, payload) => ({
     ...ACTIVE_REDUCER(state),
-    ...REDIRECT_REDUCER(state)
+    ...REDIRECT_REDUCER(state, payload)
 });
 
 export default function (state = {}, action = {}) {
-    const reducer = REDUCER(state)[action.type];
+    const reducer = REDUCER(state, action.payload)[action.type];
 
-    return reducer
-        ? reducer
-        : state;
+    return reducer || state;
 }
+

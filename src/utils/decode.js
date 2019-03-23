@@ -9,15 +9,15 @@ async function fullyDecodeURI(uri) {
 
     return uri;
 }
-export const isEncoded = log({ level: 'debug' })(
+export const isEncoded = log()(
     function isEncoded(uri = '') {
         return uri !== decodeURIComponent(uri);
     }
 );
 
 export const getUrls = log({ level: 'info' })(
-    function getUrls(url) {
-        const decoded = fullyDecodeURI(url);
+    async function getUrls(url) {
+        const decoded = await fullyDecodeURI(url);
 
         return decoded.match(urlRegex());
     }

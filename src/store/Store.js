@@ -4,7 +4,7 @@ export default class Store {
         this.reducer = reducer;
         this._state = this.reduce(initialState);
     }
-    reduce =(state, action) => {
+    reduce = (state, action) => {
         return this.reducer(state, action);
     }
 

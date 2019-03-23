@@ -27,7 +27,7 @@ function getFunctionLoggerDecorator(method, {
     paramsSanitizer = defaultSanitizer,
     resultSanitizer = defaultSanitizer,
     errorSanitizer = defaultSanitizer,
-    level = 'verbose'
+    level = 'debug'
 } = {}) {
     const logMethodName = methodName || method.name;
 
@@ -63,7 +63,7 @@ function getClassLoggerDecorator(serviceName, {
     paramsSanitizer = defaultSanitizer,
     resultSanitizer = defaultSanitizer,
     errorSanitizer = defaultSanitizer,
-    level = 'verbose'
+    level = 'debug'
 } = {}) {
     return function (target) {
         const logServiceName = serviceName || target.name;

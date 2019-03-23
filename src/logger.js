@@ -7,12 +7,10 @@ const level = LOG_LEVEL || DEBUG && 'debug' || 'info'; // eslint-disable-line no
 export default createLogger({
     level,
     levels : {
-        error   : 0,
-        warn    : 1,
-        info    : 2,
-        notice  : 3,
-        verbose : 4,
-        debug   : 5
+        error : 0,
+        warn  : 1,
+        info  : 2,
+        debug : 3
     },
     format : format.combine(
         format.timestamp(),

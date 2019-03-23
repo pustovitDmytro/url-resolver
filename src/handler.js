@@ -25,9 +25,11 @@ class Handler {
             dispatch({ type: REDIRECT_STARTED, payload: newUrl });
         }
     }
+
     async handleRedirect(url) {
         browser.redirect(url);
         dispatch(REDIRECT_FINISHED);
+        await this.handleNewTab(url);
     }
     async handleActivate() {
         browser.changeIcon('/icons/green.png');
