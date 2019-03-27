@@ -1,0 +1,20 @@
+const { MODE } = process.env;
+const isProduction = MODE === 'production';
+
+module.exports = {
+    verbose      : !isProduction,
+    sourceDir    : 'dist/firefox',
+    artifactsDir : 'dist/builds/firefox',
+    build        : {
+        overwriteDest : true,
+        asNeeded      : !isProduction
+    },
+    run : {
+        firefox        : 'bin/firefox.exe',
+        browserConsole : true,
+        startUrl       : [
+            'about:debugging',
+            'https://google.com.ua',
+        ]
+    }
+};
